@@ -7,9 +7,13 @@ import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-import pages.LoginPage;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.RegistrationPage;
 import pages.StartPage;
+import pages.components.LoginModal;
+
+import java.time.Duration;
 
 import static stepdefs.Hooks.driver;
 
@@ -27,18 +31,19 @@ public class NavigationSteps {
     public void aRegisztrációOldalraNavigálok() {
         navigateToHome();
         StartPage startPage = new StartPage(driver);
-        startPage.headerTopbar.clickRegisterMenu();
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.elementToBeClickable(startPage.headerTopbar.accountButton)).click();
+        LoginModal loginModal = new LoginModal(driver);
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(loginModal.registerButton)).click();
         RegistrationPage registrationPage = new RegistrationPage(driver);
-        Assertions.assertTrue(registrationPage.registerButton.isDisplayed());
     }
 
     @Amennyiben("A Bejelentkezés oldalra navigálok")
     public void aBejelentkezésOldalraNavigálok() {
         navigateToHome();
         StartPage startPage = new StartPage(driver);
-        startPage.headerTopbar.clickLoginMenu();
-        LoginPage loginPage = new LoginPage(driver);
-        Assertions.assertTrue(loginPage.loginButton.isDisplayed());
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.elementToBeClickable(startPage.headerTopbar.accountButton)).click();
+        LoginModal loginModal = new LoginModal(driver);
+        Assertions.assertTrue(loginModal.usernameIF.isDisplayed());
     }
 
     private void navigateToHome(){
