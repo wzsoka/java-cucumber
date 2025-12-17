@@ -40,11 +40,12 @@ Jellemző: Autentikáció
         Amennyiben A Bejelentkezés oldalra navigálok
         Amikor Bejelentkezek "<felhasználó>" és "<jelszó>" adatokkal
         Akkor "<hibaüzenet>" szöveg jelenik meg
-        És A bejelentkezés oldalon maradok
+        És A bejelentkezés oldalon maradok, amit bezárok
         Példák:
-        | felhasználó     | jelszó    | hibaüzenet                                                |
-        | apa             | XY1234567 |  Kérjük, adj meg egy érvényes e-mail címet.               |
-        | apa@gmail.com   | xy        |  A szövegnek legalább 8 karakter hosszúnak kell lennie.   |
-        | apa@gmail.com   | XY1234567 |  Kérjük, ellenőrizd a megadott adatokat.                  |
-        | teszt@gmail.com | abc1234567|  Kérjük, ellenőrizd a megadott adatokat.                  |
+        | felhasználó     | jelszó    | hibaüzenet                                                                                      |
+        | apa             | XY1234567 |  A bejelentkezés sikertelen. Kérjük, ellenőrizd bejelentkezési adataidat, és próbáld meg újra.  |
+        | apa@gmail.com   | xy        |  A jelszónak legalább 6 karakterből kell állnia, abból legalább 1 betű kell, hogy legyen.       |
+        | apa@gmail.com   | XY1234567 |  A bejelentkezés sikertelen. Kérjük, ellenőrizd bejelentkezési adataidat, és próbáld meg újra.  |
+        | teszt@gmail.com | abc1234567|  A bejelentkezés sikertelen. Kérjük, ellenőrizd bejelentkezési adataidat, és próbáld meg újra.  |
+        
 
