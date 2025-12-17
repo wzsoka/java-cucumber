@@ -1,26 +1,23 @@
-package pages;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import pages.components.HeaderTopbar;
-
 public class DashboardPage {
 
-    @FindBy(xpath = "//h1[text()[contains(.,'Fiókom')]]")
-    public WebElement newAccountHeader;
+    @FindBy(xpath = "//span[text()='Ügyfélszám']")
+    public WebElement customerNumber;
 
-    @FindBy(xpath = "//strong[text()[contains(.,'Fiókom')]]")
-    public WebElement accountMenuTitle;
+    @FindBy(xpath = "//a[@href='/hu-hu/my-account/orders']")
+    public WebElement ordersButton;
 
-    public HeaderTopbar headerTopbar;
+    @FindBy(xpath = "//button[@data-testid='logout']")
+    public WebElement logoutButton;
+
+    public DashboardHeaderTopbar headerTopbar;
 
 
     public DashboardPage(WebDriver driver) {
-        this.headerTopbar = new HeaderTopbar(driver);
+        this.headerTopbar = new DashboardHeaderTopbar(driver);
+        ConfigFileReader configFileReader = new ConfigFileReader();
+        String DASHBOARD_URL = configFileReader.getConfigValue("dashboardUrl");
+        new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.urlToBe(DASHBOARD_URL));
         PageFactory.initElements(driver, this);
     }
-
 
 }
